@@ -2,6 +2,7 @@
 '''
 
 
+from collections import OrderedDict
 from base_caching import BaseCaching
 
 
@@ -14,6 +15,7 @@ class FIFOCache(BaseCaching):
         ''' overload
         '''
         super().__init__()
+        self.cache_data = OrderedDict()
 
     def put(self, key, item):
         '''  assign to the dictionary the item value for the key
