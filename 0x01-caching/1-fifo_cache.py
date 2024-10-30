@@ -20,12 +20,14 @@ class FIFOCache(BaseCaching):
     def put(self, key, item):
         '''  assign to the dictionary the item value for the key
         '''
-        if key is not None and item is not None:
-            if len(self.cache_data) > BaseCaching.MAX_ITEMS:
-                first_key, _ = self.cache_data.popitem(last=FALSE)
-                print(f"DISCARD: {first_key}")
+        if key is None and item is None:
+            return
 
-            self.cache_data[key] = item
+        if len(self.cache_data) > BaseCaching.MAX_ITEMS:
+            first_key, _ = self.cache_data.popitem(last=FALSE)
+            print(f"DISCARD: {first_key}")
+
+        self.cache_data[key] = item
 
     def get(self, key):
         ''' Retrieve an item by key from the cache.
