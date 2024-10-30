@@ -6,10 +6,6 @@ class BasicCache(BaseCaching):
     This system has no limit on cache size.
     """
 
-    def __init__(self):
-        """Initialize the BasicCache class."""
-        super().__init__()
-
     def put(self, key, item):
         """Add an item to the cache."""
         if key is not None and item is not None:
