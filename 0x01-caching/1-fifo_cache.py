@@ -21,7 +21,7 @@ class FIFOCache(BaseCaching):
         '''  assign to the dictionary the item value for the key
         '''
         if key is not None and item is not None:
-            if len(self.cache_data[key]) > BaseCaching.MAX_ITEMS:
+            if len(self.cache_data) > BaseCaching.MAX_ITEMS:
                 first_key, _ = self.cache_data.popitem(last=FALSE)
                 print(f"DISCARD: {first_key}")
 
