@@ -1,30 +1,37 @@
 #!/usr/bin/env python3
+
+'''Task 1: FIFO caching
+'''
+
+
+from collections import OrderedDict
 from base_caching import BaseCaching
 
+
 class FIFOCache(BaseCaching):
-    """A FIFO caching system that inherits from BaseCaching.
-    Items are discarded in a First-In-First-Out order when cache limit is reached.
-    """
+    '''A class `FIFOCache` that inherits from
+       `BaseCaching` and is a caching system.
+    '''
 
     def __init__(self):
-        """Initialize the FIFOCache class with an order list for FIFO tracking."""
         super().__init__()
-        self.order = []  # List to keep track of insertion order for FIFO
+        self.cache_data = OrderedDict()
 
     def put(self, key, item):
-        """Add an item to the cache using FIFO replacement policy."""
-        if key is not None and item is not None:
-            # Check if cache has reached its max capacity
-            if len(self.cache_data) >= BaseCaching.MAX_ITEMS:
-                # Remove the first item added (FIFO)
-                first_key = self.order.pop(0)
-                del self.cache_data[first_key]
-                print(f"DISCARD: {first_key}")
+        '''assign to the dictionary `self.cache_data` the
+           `item` value for the key `key`
+        '''
 
-            # Add the new item to cache and record its order
-            self.cache_data[key] = item
-            self.order.append(key)
+        if key is None or item is None:
+            return
+
+        if len(self.cache_data) > BaseCaching.MAX_ITEMS:
+            first_key, _ = self.cache_data.popitem(last=False)
+            print(f"DISCARD: {first_key}")
+
+        self.cache_data[key] = item
 
     def get(self, key):
-        """Retrieve an item by key from the cache."""
+        '''return the value in `self.cache_data` linked to `key`
+        '''
         return self.cache_data.get(key, None)
